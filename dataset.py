@@ -218,7 +218,7 @@ class Dataset(data.Dataset):
         self.LabelType = itk.Image[itk.UC, 3]
         self.ids = []
         self.rs_size = np.array(rs_size)
-        self.rs_spacing = np.array(rs_spacing, dtype=np.float)
+        self.rs_spacing = np.array(rs_spacing, dtype=float)
         self.rs_intensity = rs_intensity
         self.label_map = label_map
         self.cls_num = cls_num
@@ -231,8 +231,8 @@ class Dataset(data.Dataset):
             reader.SetFileName(image_fn)
             reader.ReadImageInformation()
             image_size = np.array(reader.GetSize()[:3])
-            image_origin = np.array(reader.GetOrigin()[:3], dtype=np.float)
-            image_spacing = np.array(reader.GetSpacing()[:3], dtype=np.float)
+            image_origin = np.array(reader.GetOrigin()[:3], dtype=float)
+            image_spacing = np.array(reader.GetSpacing()[:3], dtype=float)
             image_phy_size = image_size * image_spacing
             patch_phy_size = self.rs_size*self.rs_spacing
 
@@ -268,8 +268,8 @@ class Dataset(data.Dataset):
             src_image = read_image(fname=image_fn, imtype=self.ImageType)
             image_cache = {}
             image_cache['size'] = np.array(src_image.GetBufferedRegion().GetSize())
-            image_cache['origin'] = np.array(src_image.GetOrigin(), dtype=np.float)
-            image_cache['spacing'] = np.array(src_image.GetSpacing(), dtype=np.float)
+            image_cache['origin'] = np.array(src_image.GetOrigin(), dtype=float)
+            image_cache['spacing'] = np.array(src_image.GetSpacing(), dtype=float)
             image_cache['array'] = zscore_normalize(image_2_array(src_image).copy())
             self.im_cache[image_fn] = image_cache
         image_cache = self.im_cache[image_fn]
@@ -289,8 +289,8 @@ class Dataset(data.Dataset):
         if label_fn not in self.lb_cache:
             src_label = read_image(fname=label_fn, imtype=self.LabelType)
             label_cache = {}
-            label_cache['origin'] = np.array(src_label.GetOrigin(), dtype=np.float)
-            label_cache['spacing'] = np.array(src_label.GetSpacing(), dtype=np.float)
+            label_cache['origin'] = np.array(src_label.GetOrigin(), dtype=float)
+            label_cache['spacing'] = np.array(src_label.GetSpacing(), dtype=float)
             label_cache['array'] = image_2_array(src_label).copy()
             self.lb_cache[label_fn] = label_cache
         label_cache = self.lb_cache[label_fn]

@@ -27,7 +27,7 @@ cfg['exclude_case'] = [
 
 # data path of each client dataset
 cfg['node_list'] = [
-    ['Node-1', ['MSD'], ['FedCross\MSD'], [19,3,10]], # 32 in total
+    ['Node-1', ['MSD'], ['/kaggle/working/fedcross2/MSD'], [19,3,10]], # 32 in total
     # ['Node-2', ['NCI-ISBI'], ['/set_your_own_data_path/NCI-ISBI-Prostate'], [48,8,24]], # 80 in total
     # ['Node-3', ['PROMISE12'], ['/set_your_own_data_path/PROMISE12'], [30,5,15]], # 50 in total
     # ['Node-4', ['PROSTATEx'], ['/set_your_own_data_path/PROSTATEx'], [122,20,62]], # 204 in total
